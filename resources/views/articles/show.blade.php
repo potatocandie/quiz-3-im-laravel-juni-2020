@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="row">
+    @include('partials._messages')
     <div class="col-lg-8">
         <div class="card mb-4 shadow-lg">
             <div class="card-header">

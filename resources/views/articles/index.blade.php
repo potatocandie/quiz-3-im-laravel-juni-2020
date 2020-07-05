@@ -59,14 +59,12 @@
 <!-- Page level custom scripts -->
 <script src="{{ asset('/sbadmin2/js/demo/datatables-demo.js') }}"></script>
 
-@if (Session::has('success'))
 <script>
     Swal.fire({
-        title: 'Berhasil!',
-        text: 'data',
+        title: 'Success!',
+        text:  "Article Retrived!", 
         icon: 'success',
         confirmButtonText: 'OK Get Me In'
     })
 </script>
-@endif
 @endpush

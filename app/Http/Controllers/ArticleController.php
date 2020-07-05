@@ -17,7 +17,6 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::orderBy('created_at', 'desc')->paginate(4);
-        Session::flash('success', 'Articles Retrieved!');
         return view('articles.index')->withArticles($articles);
     }
 
@@ -44,6 +43,9 @@ class ArticleController extends Controller
 
         $article->save();
 
+        if (Session::get('success')) {
+            # code...
+        }
         Session::flash('success', 'Your article has been saved!');
 
         return redirect()->route('articles.index');
@@ -90,7 +92,6 @@ class ArticleController extends Controller
         $article->delete();
 
         Session::flash('success', 'Your article has been deleted!');
-
         return redirect()->route('articles.index');
     }
 }

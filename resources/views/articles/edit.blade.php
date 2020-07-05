@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    @include('partials._messages')
     <div class="row">
         <div class="col-lg-10 m-auto">
             <div class="p-3">
