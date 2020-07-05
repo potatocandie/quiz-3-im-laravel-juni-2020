@@ -19,8 +19,15 @@
                     </div>
                     <div class="form-group">
                         <label for="tags">Tags: </label>
-                        <input name="tags" type="text" class="form-control"
-                            value="<?php foreach ($article->tags as $tag) {echo "$tag->content,";}?>">
+                        <input name="tags" type="text" class="form-control" value="<?php
+                        $len = count($article->tags);
+                             foreach ($article->tags as $key => $tag) {
+                                    echo "$tag->content,";
+                                    if ($key == $len - 1) {
+                                        echo "$tag->content";
+                                    }
+                                }
+                             ?>">
                     </div>
                     <div class="form-group">
                         <label for="isi">Body: </label>
