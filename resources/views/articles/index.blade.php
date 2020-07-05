@@ -24,6 +24,7 @@
                         <th>Title</th>
                         <th>Body</th>
                         <th>Slug</th>
+                        <th>Tags</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -34,6 +35,11 @@
                         <td>{{ substr($article->judul , 0, 20) }} {{ strlen($article->judul) > 20 ? "..." : "" }}</td>
                         <td>{{ substr($article->isi , 0, 25) }} {{ strlen($article->isi) > 25 ? "..." : "" }}</td>
                         <td>{{ substr($article->slug , 0, 20) }} {{ strlen($article->slug) > 20 ? "..." : "" }}</td>
+                        <td>
+                            @foreach ($article->tags as $tag)
+                            <a href="#"><span class="btn btn-primary py-0 lead"> {{ $tag->content }}</span></a>
+                            @endforeach
+                        </td>
                         <td class="text-center">
                             <a href="{{ route('articles.show', $article->id) }}">
                                 <button class="btn btn-outline-primary px-3">Show</button>

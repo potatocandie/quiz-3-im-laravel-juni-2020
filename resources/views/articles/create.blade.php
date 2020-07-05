@@ -16,6 +16,11 @@
                         <input name="judul" type="text" class="form-control" placeholder="article title ...">
                     </div>
                     <div class="form-group">
+                        <label for="tags">Tags: </label>
+                        <input name="tags" type="text" class="form-control"
+                            placeholder="Input Multiple Tags Separated By Coma">
+                    </div>
+                    <div class="form-group">
                         <label for="isi">Body: </label>
                         <textarea name="isi" type="text" class="form-control" rows="9"
                             placeholder="article content ..."></textarea>
@@ -31,3 +36,7 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+
+@endpush

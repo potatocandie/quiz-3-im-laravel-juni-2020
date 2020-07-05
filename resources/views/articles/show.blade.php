@@ -10,8 +10,9 @@
                 <span class="font-weight-bold h3">{{ $article->judul }}</span>
             </div>
             <div class="card-body py-2">
-                <a href="#"><span class="btn btn-primary py-0 lead">laravel</span></a>
-                <a href="#"><span class="btn btn-success py-0 lead">react</span></a>
+                @foreach ($article->tags as $tag)
+                <a href="#"><span class="btn btn-primary py-0 lead"> {{ $tag->content }}</span></a>
+                @endforeach
             </div>
             <div class=" card-body">
                 <p class="text-primary h6 mb-3">BODY</p>

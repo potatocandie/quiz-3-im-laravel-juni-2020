@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Article;
+use App\Tag;
 use Session;
 
 class ArticleController extends Controller
@@ -16,7 +17,7 @@ class ArticleController extends Controller
 
     public function index()
     {
-        $articles = Article::orderBy('created_at', 'desc')->paginate(4);
+        $articles = Article::orderBy('created_at', 'desc')->get();
         return view('articles.index')->withArticles($articles);
     }
 
@@ -30,6 +31,7 @@ class ArticleController extends Controller
         $request->validate([
             'judul' => ['required', 'unique:articles', 'max:255'],
             'isi' => ['required'],
+            'tags' => ['required'],
         ]);
 
         $judul = $request->judul;
@@ -41,11 +43,18 @@ class ArticleController extends Controller
             'slug' => $slug,
         ]);
 
-        $article->save();
-
-        if (Session::get('success')) {
-            # code...
+        if ($article) {
+            $tagNames = explode(',', $request->tags);
+            $tagIds = [];
+            foreach ($tagNames as $tagName) {
+                $tag = Tag::firstOrCreate(['content' => $tagName]);
+                if ($tag) {
+                    $tagIds[] = $tag->id;
+                }
+            }
+            $article->tags()->sync($tagIds);
         }
+
         Session::flash('success', 'Your article has been saved!');
 
         return redirect()->route('articles.index');
@@ -70,6 +79,7 @@ class ArticleController extends Controller
         $request->validate([
             'judul' => ['required', 'unique:articles,judul,' . $article->id, 'max:255'],
             'isi' => ['required'],
+            'tags' => ['required'],
         ]);
 
         $judul = $request->input('judul');
@@ -80,6 +90,18 @@ class ArticleController extends Controller
         $article->slug = $slug;
 
         $article->save();
+
+        if ($article) {
+            $tagNames = explode(',', $request->tags);
+            $tagIds = [];
+            foreach ($tagNames as $tagName) {
+                $tag = Tag::firstOrCreate(['content' => $tagName]);
+                if ($tag) {
+                    $tagIds[] = $tag->id;
+                }
+            }
+            $article->tags()->sync($tagIds);
+        }
 
         Session::flash('success', 'Your article has been updated!');
 
