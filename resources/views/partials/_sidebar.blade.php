@@ -9,24 +9,21 @@
         <div class="sidebar-brand-text mx-3">Sanbercode Medium</div>
     </a>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
-
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item">
-        <a class="nav-link" href="index.html">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
+    <li class="nav-item {{ Request::is('/') ? 'active' : ''}}">
+        <a class="nav-link" href="{{ route('articles.erd') }}">
+            <i class="fas fa-fw fas fa-sitemap"></i>
+            <span>ERD MEDIUM</span></a>
     </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item active">
-        <a class="nav-link" href="tables.html">
+    <li class="nav-item {{ Request::is('artikel') ? 'active' : ''}}">
+        <a class="nav-link" href="{{ route('articles.index') }}">
             <i class="fas fa-fw fa-table"></i>
-            <span>Articles</span></a>
+            <span>ARTICLE</span></a>
     </li>
 
     <!-- Divider -->

@@ -11,14 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('master');
-});
+Route::get('/', ['as' => 'articles.erd', 'uses' => 'ArticleController@erd']);
 
-Route::get('/items/create', 'ItemController@create'); // menampilkan halaman form
-Route::post('/items', 'ItemController@store'); // menyimpan data
-Route::get('/items', 'ItemController@index'); // menampilkan semua
-Route::get('/items/{id}', 'ItemController@show'); // menampilkan detail item dengan id 
-Route::get('/items/{id}/edit', 'ItemController@edit'); // menampilkan form untuk edit item
-Route::put('/items/{id}', 'ItemController@update'); // menyimpan perubahan dari form edit
-Route::delete('/items/{id}', 'ItemController@destroy'); // menghapus data dengan id
+Route::get('/artikel', ['as' => 'articles.index', 'uses' => 'ArticleController@index']);
+
+Route::get('/artikel/create', ['as' => 'articles.create', 'uses' => 'ArticleController@create']);
+Route::post('/artikel', ['as' => 'articles.store', 'uses' => 'ArticleController@store']);
+Route::get('/artikel/{id}', ['as' => 'articles.show', 'uses' => 'ArticleController@show']);
+
+Route::get('/artikel/{id}/edit', ['as' => 'articles.edit', 'uses' => 'ArticleController@edit']);
+Route::put('/artikel/{id}', ['as' => 'articles.update', 'uses' => 'ArticleController@update']);
+
+Route::delete('/artikel/{id}', ['as' => 'articles.destroy', 'uses' => 'ArticleController@destroy']);
